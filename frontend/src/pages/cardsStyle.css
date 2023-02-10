@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+    text-align: left;
+}
+/* 
+.cards {
+    justify-content: center;
+    -webkit-justify-content: center;
+    width: 100%;
+} */
+
+.card__like {
+    width: 18px;
+}
+
+.card__img {
+    visibility: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 200px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.card__img--hover {
+    transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: absolute;
+    height: 200px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    top: 0;
+
+}
+
+.card {
+    transition: all .4s cubic-bezier(0.175, 0.885, 0, 1);
+    background-color: #fff;
+    width: 200px;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid rgba(237, 237, 237, 1);
+}
+
+.card:hover {
+    box-shadow: 0px 30px 18px -8px rgba(0, 0, 0, 0.1);
+    transform: scale(1.10, 1.10);
+    border: 2px solid rgba(0, 142, 204, 1)
+}
+
+.card__info {
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.8);
+    ;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    /* padding: 16px 24px 24px 24px; */
+    padding: 10px;
+}
+
+.card__category {
+    text-transform: uppercase;
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    color: rgba(102, 102, 102, 1);
+}
+
+.card__title {
+    color: rgba(102, 102, 102, 1);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.card__by {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.card__author {
+    font-weight: 600;
+    color: rgba(102, 102, 102, 1);
+    text-decoration: underline;
+}
+
+.card:hover .card__img--hover {
+    height: 100%;
+    opacity: 0.5;
+}
+
+.card:hover .card__info {
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+}
+
+.card:hover .card__info-hover {
+    opacity: 1;
+}
+
+.card__view {
+    display: flex;
+    justify-content: center;
+}
+
+.View {
+    text-align: center;
+    width: 113px;
+    height: 36px;
+    left: 120px;
+    width: 100%;
+    color: rgba(255, 255, 255, 1);
+    background: #008ECC;
+    border: none;
+    border-radius: 12px;
+}
