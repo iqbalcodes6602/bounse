@@ -23,14 +23,25 @@ function SpecProduct() {
 
     const [productDetails, setProductDetails] = useState([]);
 
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/api/product/singleproduct/${productId}`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             setProductDetails(data)
+    //             console.log(data)
+    //         })
+    // }, [])
+
+
     useEffect(() => {
-        fetch(`http://localhost:5000/api/product/singleproduct/${productId}`)
-            .then((response) => response.json())
-            .then((data) => {
-                setProductDetails(data)
-                console.log(data)
-            })
+        fetchAllSpecProduct();
+
     }, [])
+    const fetchAllSpecProduct = async () => {
+        const { data } = await axios.get(`/api/product/singleproduct/${productId}`);
+        setProductDetails(data);
+        console.log(data);
+    }
 
     return (
         <>

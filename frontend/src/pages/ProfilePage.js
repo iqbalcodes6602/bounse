@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
 
 function ProfilePage() {
@@ -26,11 +27,19 @@ function ProfilePage() {
     const [ads, setAds] = useState();
     var finalArray = new Array();
 
+    // useEffect(() => {
+    //     fetch("http://localhost:5000/api/product/fetchAll")
+    //         .then((response) => response.json())
+    //         .then((data) => setAds(data))
+    // }, [])
+
     useEffect(() => {
-        fetch("http://localhost:5000/api/product/fetchAll")
-            .then((response) => response.json())
-            .then((data) => setAds(data))
+        fetchAllProducts();
     }, [])
+    const fetchAllProducts = async () => {
+        const { data } = await axios.get("/api/product/fetchAll");
+        setAds(data);
+    }
 
     const filterArray = (ads) => {
         const newArray = ads.filter(function (ad) {

@@ -26,13 +26,25 @@ function ProductsPage() {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    // useEffect(() => {
+    //     setSearchProducts(search);
+    //     fetch("http://localhost:5000/api/product/fetchAll")
+    //         .then((response) => response.json())
+    //         .then((data) => setProducts(data))
+            // .then(handleSearch());
+    // }, [])
+
     useEffect(() => {
         setSearchProducts(search);
-        fetch("http://localhost:5000/api/product/fetchAll")
-            .then((response) => response.json())
-            .then((data) => setProducts(data))
-            .then(handleSearch());
+        fetchAllProducts();
+
     }, [])
+    const fetchAllProducts = async () => {
+        const { data } = await axios.get("/api/product/fetchAll");
+        setProducts(data);
+        handleSearch();
+    }
+
 
     const location = useLocation();
     const search = location.state?.search;
@@ -193,7 +205,7 @@ function ProductsPage() {
                     fontWeight="500"
                     textAlign="center"
                 >
-                    {search === "" ? "": "Search Results"}
+                    {search === "" ? "" : "Search Results"}
                 </Text>
                 <br />
                 <SimpleGrid
@@ -239,7 +251,7 @@ function ProductsPage() {
                                         </div>
                                     </span>
                                     <div className="card__info">
-                                        <span className="card__by">Seller: <a href="#" class="card__author" title="author">{product.owner.name}</a></span><br />
+                                        <span className="card__by">Seller: <a href="#" className="card__author" title="author">{product.owner.name}</a></span><br />
                                         <span className="card__category">{product.name}</span>
                                         <h2 className="card__title">Rs. {product.price}</h2>
 
@@ -254,7 +266,7 @@ function ProductsPage() {
                                             </Link>
                                         }
                                         {!user &&
-                                                <div className="card__view"> <button onClick={onOpen} className="View">Login for Details</button></div>
+                                            <div className="card__view"> <button onClick={onOpen} className="View">Login for Details</button></div>
                                         }
                                     </div>
                                 </article>
@@ -271,7 +283,7 @@ function ProductsPage() {
                     marginLeft="50px"
                     fontWeight="500"
                 >
-                    {search === "" ? "All": "Other"} Products
+                    {search === "" ? "All" : "Other"} Products
                 </Text>
                 <br />
                 <SimpleGrid
@@ -343,7 +355,7 @@ function ProductsPage() {
                                             </div>
                                         </span>
                                         <div className="card__info">
-                                            <span className="card__by">Seller: <a href="#" class="card__author" title="author">{product.owner.name}</a></span><br />
+                                            <span className="card__by">Seller: <a href="#" className="card__author" title="author">{product.owner.name}</a></span><br />
                                             <span className="card__category">{product.name}</span>
                                             <h2 className="card__title">Rs. {product.price}</h2>
 
