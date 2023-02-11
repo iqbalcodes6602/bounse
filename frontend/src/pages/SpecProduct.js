@@ -3,7 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { ChatState } from "../context/ChatProvider";
 import SearchBar from '../components/SearchBar';
 import axios from 'axios';
-import { Avatar, Button, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Avatar, Button, Grid, GridItem, Spinner, Text } from '@chakra-ui/react';
 import Carousel from 'react-elastic-carousel';
 
 const breakPoints = [
@@ -67,7 +67,7 @@ function SpecProduct() {
                         border="1px solid #e5e5e5"
                         width="800px"
                     >
-                        <GridItem display="flex" alignItems="center" p={5} height="100%" width="100%" backgroundColor="#d8d8d8" colSpan={{ base: 2, sm: 1, md: 1, lg: 1, xl: 1 }} >
+                        <GridItem display="flex" alignItems="center" p={5} height="100%" width="100%" backgroundColor="#f8f8f8" colSpan={{ base: 2, sm: 1, md: 1, lg: 1, xl: 1 }} >
                             <Carousel>
                                 {productDetails.images?.map((image) => (
                                     <img style={{
@@ -110,12 +110,13 @@ function SpecProduct() {
                                 </Text>
                             </div>
 
-                            <center style={{padding:"0px 0px 10px 0px"}} >
+                            <center style={{ padding: "0px 0px 10px 0px" }} >
                                 {(user._id === productDetails.owner._id)
                                     ?
-                                    <Button _hover={{ cursor: "default" }} >This is one of your products</Button>
+                                    <Button width="100%" _hover={{ cursor: "default" }} >This is one of your products</Button>
                                     :
                                     <Button
+                                        width="100%"
                                         _hover={{
                                             transition: "all ease 0.3s",
                                             backgroundColor: "#0084BD"
@@ -159,7 +160,12 @@ function SpecProduct() {
                     </Grid>
                 </div>
                 :
-                null
+                <Spinner
+                    size="xl"
+                    alignSelf="center"
+                    marginLeft="50%"
+                    color='#c5c5c5'
+                />
             }
         </>
     )

@@ -1,6 +1,6 @@
 import { Button, Grid, GridItem, SimpleGrid, Text } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import SellProductForm from '../components/SellProductForm';
 import { ChatState } from '../context/ChatProvider';
@@ -19,6 +19,7 @@ import axios from 'axios';
 
 
 function ProfilePage() {
+    const history = useHistory()
     // const { user } = ChatState();
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -48,6 +49,13 @@ function ProfilePage() {
         finalArray = newArray;
     }
 
+    const seeAllHandler = () => {
+        history.push({
+            pathname: "/products",
+            state: { search: "" },
+        })
+    }
+
     return (
         <div>
             {ads && filterArray(ads)}
@@ -70,6 +78,12 @@ function ProfilePage() {
                         >
                             All ads you posted
                         </Text>
+                        <Button
+                            color="#666666"
+                            onClick={seeAllHandler}
+                        >
+                            See All Products
+                        </Button>
                         <Button color="#666666" onClick={onOpen}><FontAwesomeIcon icon={faPlus} />&nbsp;Create a new AD</Button>
                     </div>
                     <div style={{

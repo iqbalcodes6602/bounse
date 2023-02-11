@@ -21,7 +21,8 @@ function SearchBar() {
     const logoutHandler = () => {
         localStorage.removeItem("userInfo");
         history.push("/");
-        window.location.reload();
+        // window.location.reload();
+        window.location.href = "/";
     }
 
     return (

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, GridItem, Input, SimpleGrid, useToast } from '@chakra-ui/react';
+import { Box, Button, Grid, GridItem, Input, SimpleGrid, Spinner, useToast } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom';
@@ -26,12 +26,14 @@ function ProductsPage() {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
+    const [loading, setLoading] = useState(false);
+
     // useEffect(() => {
     //     setSearchProducts(search);
     //     fetch("http://localhost:5000/api/product/fetchAll")
     //         .then((response) => response.json())
     //         .then((data) => setProducts(data))
-            // .then(handleSearch());
+    // .then(handleSearch());
     // }, [])
 
     useEffect(() => {
@@ -40,6 +42,7 @@ function ProductsPage() {
 
     }, [])
     const fetchAllProducts = async () => {
+        setLoading(true);
         const { data } = await axios.get("/api/product/fetchAll");
         setProducts(data);
         handleSearch();
@@ -47,7 +50,7 @@ function ProductsPage() {
 
 
     const location = useLocation();
-    const search = location.state?.search;
+    const [search, setSearch] = useState(location.state?.search);
     const toast = useToast();
 
     const [products, setProducts] = useState([]);
@@ -68,7 +71,7 @@ function ProductsPage() {
         try {
             const { data } = await axios.get(`/api/product?search=${searchProducts}`);
             setsearchResult(data);
-
+            setLoading(false);
         } catch (error) {
             toast({
                 title: "Error Ocured",
@@ -86,7 +89,8 @@ function ProductsPage() {
             try {
                 const { data } = await axios.get(`/api/product?search=${searchProducts}`);
                 setsearchResult(data);
-
+                setSearch(searchProducts);
+                setLoading(false);
             } catch (error) {
                 toast({
                     title: "Error Ocured",
@@ -102,6 +106,7 @@ function ProductsPage() {
     const logoutHandler = () => {
         localStorage.removeItem("userInfo");
         history.push("/");
+        window.location.href = "/";
         console.log(user)
     }
 
@@ -119,7 +124,7 @@ function ProductsPage() {
                         colSpan={{ base: 12, sm: 12, md: 3, lg: 3, xl: 3 }}
                     >
                         <Text textAlign="center" color="#008ECC" fontSize="30px" >
-                            <b> <Link to="/" >BounSe</Link> </b>
+                            <b> <Link to={user ? "profile" : "/"} >BounSe</Link> </b>
                         </Text>
                     </GridItem>
 
@@ -198,90 +203,116 @@ function ProductsPage() {
                 >
                     Go
                 </Button> */}
-                <br />
-                <Text
-                    fontSize="24px"
-                    color="#666666"
-                    fontWeight="500"
-                    textAlign="center"
-                >
-                    {search === "" ? "" : "Search Results"}
-                </Text>
-                <br />
-                <SimpleGrid
-                    // p="2"
-                    // gap={2}
-                    // templateColumns='repeat(4, 1fr)'
-                    // textAlign="center"
-                    // alignItems="center"
-                    p="2"
-                    gap={10}
-                    display="flex"
-                    flexWrap="wrap"
-                    justifyContent="center"
-                    textAlign="center"
-                    alignItems="center"
-                >
-                    {
-                        searchResult?.map((product) => (
-                            // <Box key={product._id} >
-                            //     <div>
-                            //         <h2>{product.kind}</h2>
-                            //         <h2>{product.owner.name}</h2>
-                            //         <h2>{product.price}</h2>
-                            //         <h2><img width="100px" alt="proImg" src={product.images[0]} /></h2>
-                            //         <Link
-                            //             to={{
-                            //                 pathname: "/specproduct",
-                            //                 state: { proId: product._id },
-                            //             }}
-                            //         >
-                            //             View
-                            //         </Link>
-                            //     </div>
-                            // </Box>
-                            <section className="cards" key={product._id}>
-                                <article className="card card--1">
-                                    <div className="card__img"></div>
-                                    <span className="card_link">
-                                        <div className="card__img--hover"
-                                            style={{
-                                                backgroundImage: 'url(' + product.images[0] + ')'
-                                            }}>
-                                        </div>
-                                    </span>
-                                    <div className="card__info">
-                                        <span className="card__by">Seller: <a href="#" className="card__author" title="author">{product.owner.name}</a></span><br />
-                                        <span className="card__category">{product.name}</span>
-                                        <h2 className="card__title">Rs. {product.price}</h2>
 
-                                        {
-                                            user && <Link
-                                                to={{
-                                                    pathname: "/specproduct",
-                                                    state: { proId: product._id },
-                                                }}
-                                            >
-                                                <div className="card__view"> <button className="View">View Product</button></div>
-                                            </Link>
-                                        }
-                                        {!user &&
-                                            <div className="card__view"> <button onClick={onOpen} className="View">Login for Details</button></div>
-                                        }
-                                    </div>
-                                </article>
-                            </section>
-                        ))
-                    }
-                </SimpleGrid>
-                {(searchResult.length === 0 && search !== "") ? <><br />looks like the product u were searching for was not found looks other products<br /></> : null}
-                <hr />
+                {search === "" ? "" :
+                    <>
+                        <br />
+                        <Text
+                            fontSize="24px"
+                            color="#666666"
+                            fontWeight="500"
+                            textAlign="center"
+                        >
+                            Search Results
+                        </Text>
+                        <br />
+                        <SimpleGrid
+                            // p="2"
+                            // gap={2}
+                            // templateColumns='repeat(4, 1fr)'
+                            // textAlign="center"
+                            // alignItems="center"
+                            p="2"
+                            gap={10}
+                            display="flex"
+                            flexWrap="wrap"
+                            justifyContent="center"
+                            textAlign="center"
+                            alignItems="center"
+                        >
+                            {
+                                searchResult?.map((product) => (
+                                    // <Box key={product._id} >
+                                    //     <div>
+                                    //         <h2>{product.kind}</h2>
+                                    //         <h2>{product.owner.name}</h2>
+                                    //         <h2>{product.price}</h2>
+                                    //         <h2><img width="100px" alt="proImg" src={product.images[0]} /></h2>
+                                    //         <Link
+                                    //             to={{
+                                    //                 pathname: "/specproduct",
+                                    //                 state: { proId: product._id },
+                                    //             }}
+                                    //         >
+                                    //             View
+                                    //         </Link>
+                                    //     </div>
+                                    // </Box>
+                                    <section className="cards" key={product._id}>
+                                        <article className="card card--1">
+                                            <div className="card__img"></div>
+                                            <span className="card_link">
+                                                <div className="card__img--hover"
+                                                    style={{
+                                                        backgroundImage: 'url(' + product.images[0] + ')'
+                                                    }}>
+                                                </div>
+                                            </span>
+                                            <div className="card__info">
+                                                <span className="card__by">Seller: <a href="#" className="card__author" title="author">{product.owner.name}</a></span><br />
+                                                <span className="card__category">{product.name}</span>
+                                                <h2 className="card__title">Rs. {product.price}</h2>
+
+                                                {
+                                                    user && <Link
+                                                        to={{
+                                                            pathname: "/specproduct",
+                                                            state: { proId: product._id },
+                                                        }}
+                                                    >
+                                                        <div className="card__view"> <button className="View">View Product</button></div>
+                                                    </Link>
+                                                }
+                                                {!user &&
+                                                    <div className="card__view"> <button onClick={onOpen} className="View">Login for Details</button></div>
+                                                }
+                                            </div>
+                                        </article>
+                                    </section>
+                                ))
+                            }
+                        </SimpleGrid>
+                        {(loading && search !== "") ? <>
+                            <Spinner
+                                size="xl"
+                                alignSelf="center"
+                                marginLeft="50%"
+                                color='#c5c5c5'
+                            />
+                        </> : null}
+                        {(searchResult.length === 0 && search !== "" && !loading) ? <><br />
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "center",
+                                backgroundColor: "#ffb2b2",
+                                margin: "0px 40px 0px 40px",
+                                padding: "10px 20px 10px 20px",
+                                color: "red",
+                                borderRadius: "5px",
+                                border: "1px solid #ff6161"
+                            }} >
+                                looks like the product u were searching for was not found looks other products
+                            </div></> : null}
+                        <hr />
+                    </>
+                }
                 <br />
+
                 <Text
                     fontSize="24px"
                     color="#666666"
-                    marginLeft="50px"
                     fontWeight="500"
+                    textAlign="center"
                 >
                     {search === "" ? "All" : "Other"} Products
                 </Text>
