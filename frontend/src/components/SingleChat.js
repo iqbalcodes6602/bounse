@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import ProfileModal from './miscellaneous/ProfileModal';
 import { getSender, getSenderFull } from '../config/ChatLogics';
 import { ChatState } from '../context/ChatProvider'
-import UpdateGroupChatModal from './miscellaneous/UpdateGroupChatModal';
 import "./style.css"
 import axios from 'axios';
 import ScrollableChat from './ScrollableChat';

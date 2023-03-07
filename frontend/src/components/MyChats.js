@@ -3,7 +3,6 @@ import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { getSender } from "../config/ChatLogics";
-import ChatLoading from "./ChatLoading";
 import { ChatState } from "../context/ChatProvider";
 import { useLocation } from "react-router-dom";
 
@@ -117,7 +116,8 @@ const MyChats = ({ fetchAgain }) => {
             ))}
           </Stack>
         ) : (
-          <ChatLoading />
+          // <ChatLoading />
+          null
         )}
       </Box>
     </Box>

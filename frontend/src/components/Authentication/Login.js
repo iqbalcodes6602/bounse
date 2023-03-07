@@ -107,7 +107,7 @@ function Login() {
         <Button _hover={{ transition: "all ease 0.3s", backgroundColor: "#0084BD" }} backgroundColor="#008ECC" color="white" onClick={submitHandler} isLoading={loading} >
           Login
         </Button>
-        <Button
+        {/* <Button
           variant="solid"
           onClick={() => {
             setEmail("guest@example.com");;
@@ -115,7 +115,7 @@ function Login() {
           }}
         >
           Get Guest User Credentials
-        </Button>
+        </Button> */}
       </VStack>
     </>
   )
