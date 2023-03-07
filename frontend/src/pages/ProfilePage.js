@@ -68,7 +68,8 @@ function ProfilePage() {
                         justifyContent: "space-evenly",
                         alignItems: "center",
                         // width: "400px"
-                        margin: "20px"
+                        margin: "20px",
+                        gap: "5px"
                     }} >
                         <Text
                             fontSize="24px"

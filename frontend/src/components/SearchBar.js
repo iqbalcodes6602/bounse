@@ -35,20 +35,20 @@ function SearchBar() {
                 alignItems="center"
             >
                 <GridItem
-                    colSpan={{ base: 12, sm: 12, md: 3, lg: 3, xl: 3 }}
+                    colSpan={{ base: 12, md: 3 }}
                 >
                     <Text textAlign="center" color="#008ECC" fontSize="30px" >
                         <b> <Link to="/profile" >BounSe</Link> </b>
                     </Text>
                 </GridItem>
 
-                <GridItem colSpan={7} >
+                <GridItem colSpan={{ base: 8, md: 7 }} >
                     <FormControl>
                         <Input backgroundColor="#F3F9FB" width="80%" onKeyDown={searchHandler} placeholder='Search...' type="text" onChange={(e) => { setSearch(e.target.value) }} />
                     </FormControl>
                 </GridItem>
 
-                <GridItem colSpan={1} >
+                <GridItem colSpan={{ base: 2, md: 1 }} >
                     <Link
                         to={{
                             pathname: "/chats",
@@ -61,7 +61,7 @@ function SearchBar() {
                     </Link>
                 </GridItem>
 
-                <GridItem colSpan={1} >
+                <GridItem colSpan={{ base: 2, md: 1 }} >
                     <Menu>
                         <MenuButton>
                             <Avatar size="sm" cursor="pointer" name={user.name} src={user.pic} />

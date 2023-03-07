@@ -2,11 +2,11 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const userRoutes = require('./routes/userRoutes')
-const {authUser} = require("./controllers/userController")
+const { authUser } = require("./controllers/userController")
 const chatRoutes = require('./routes/chatRoutes')
 const messageRoutes = require('./routes/messageRoutes')
 const productRoutes = require('./routes/productRoutes')
-const {notFound, errorHandler} = require("./middleware/errorMiddleware")
+const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 const cors = require("cors")
 
 
@@ -32,5 +32,10 @@ app.use(notFound)
 app.use(errorHandler)
 
 
-const PORT = process.env.PORT ;
-app.listen(PORT, console.log(`server started  on port ${PORT}`));
+const PORT = process.env.PORT;
+
+if (process.env.PORT) {
+    app.listen(PORT, console.log(`server started  on port ${PORT}`));
+}
+
+module.exports = app;
