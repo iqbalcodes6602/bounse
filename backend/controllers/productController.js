@@ -36,7 +36,6 @@ const registerProduct = asyncHandler(async (req,res) => {
     }
 });
 
-// api/users?search=piyush
 const searchProducts = asyncHandler(async (req,res) => {
     const keyword = req.query.search?{
         $or: [
@@ -47,7 +46,7 @@ const searchProducts = asyncHandler(async (req,res) => {
     }
     : {};
 
-    const products = await Product.find(keyword).find()
+    const products = await Product.find(keyword).find();
     res.send(products);
 })
 
