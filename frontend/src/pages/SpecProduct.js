@@ -4,7 +4,7 @@ import { ChatState } from "../context/ChatProvider";
 import SearchBar from '../components/SearchBar';
 import axios from 'axios';
 import { Avatar, Button, Grid, GridItem, Spinner, Text } from '@chakra-ui/react';
-// import Carousel from 'react-elastic-carousel';
+import Carousel from 'react-elastic-carousel';
 
 
 function SpecProduct() {
@@ -62,14 +62,14 @@ function SpecProduct() {
                         width="800px"
                     >
                         <GridItem display="flex" alignItems="center" p={5} height="100%" width="100%" backgroundColor="#f8f8f8" colSpan={{ base: 2, sm: 1, md: 1, lg: 1, xl: 1 }} >
-                            {/* <Carousel>
+                            <Carousel>
                                 {productDetails.images?.map((image) => (
                                     <img style={{
                                         marginLeft: "auto", marginRight: "auto",
                                     }} width="200px" key={image} src={image} alt="img" />
                                 ))
                                 }
-                            </Carousel> */}
+                            </Carousel>
                         </GridItem>
 
                         <GridItem color="#666666" textAlign="left" height="100%" width="100%" colSpan={{ base: 2, sm: 1, md: 1, lg: 1, xl: 1 }} >
