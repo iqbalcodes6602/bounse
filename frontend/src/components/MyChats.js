@@ -11,7 +11,7 @@ const MyChats = ({ fetchAgain }) => {
   const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const location = useLocation();
-  console.log(location.state.currentUser);
+  // console.log(location.state.currentUser);
   const [loggedUser, setLoggedUser] = useState(location.state.currentUser);
 
   useEffect(() => {
