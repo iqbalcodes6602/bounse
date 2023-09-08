@@ -38,7 +38,7 @@ function ProfilePage() {
         fetchAllProducts();
     }, [])
     const fetchAllProducts = async () => {
-        const { data } = await axios.get("/api/product/fetchAll");
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/product/fetchAll`);
         setAds(data);
     }
 

@@ -43,7 +43,7 @@ function ProductsPage() {
     }, [])
     const fetchAllProducts = async () => {
         setLoading(true);
-        const { data } = await axios.get("/api/product/fetchAll");
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/product/fetchAll`);
         setProducts(data);
         handleSearch();
     }
@@ -69,7 +69,7 @@ function ProductsPage() {
             return;
         }
         try {
-            const { data } = await axios.get(`/api/product?search=${searchProducts}`);
+            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/product?search=${searchProducts}`);
             setsearchResult(data);
             setLoading(false);
         } catch (error) {
@@ -87,7 +87,7 @@ function ProductsPage() {
     const handleSearch2 = async (event) => {
         if (event.key === "Enter" && searchProducts) {
             try {
-                const { data } = await axios.get(`/api/product?search=${searchProducts}`);
+                const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/product?search=${searchProducts}`);
                 setsearchResult(data);
                 setSearch(searchProducts);
                 setLoading(false);

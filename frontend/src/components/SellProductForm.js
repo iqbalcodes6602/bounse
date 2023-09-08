@@ -8,9 +8,9 @@ import { useHistory } from 'react-router-dom';
 
 function SellProductForm() {
     // const { user } = ChatState();
-  const user = JSON.parse(localStorage.getItem("userInfo"));
+    const user = JSON.parse(localStorage.getItem("userInfo"));
 
-    
+
     const toast = useToast();
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -50,7 +50,8 @@ function SellProductForm() {
                 },
             };
             const { data } = await axios.post(
-                "/api/product",
+                // "/api/product",
+                `${process.env.REACT_APP_API_URL}/api/product`,
                 {
                     kind,
                     owner,
