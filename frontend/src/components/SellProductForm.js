@@ -99,10 +99,10 @@ function SellProductForm() {
 
         if (pics.type === "image/jpeg" || pics.type === "image/png") {
             const data = new FormData();
-            data.append("upload_preset", "wkvvcgfu");
+            data.append("upload_preset", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_PRESET}`);
             data.append("file", pics);
-            data.append("cloud_name", "dcqiakni6");
-            fetch("https://api.cloudinary.com/v1_1/dcqiakni6/image/upload", {
+            data.append("cloud_name", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_CLOUD}`);
+            fetch(`${process.env.REACT_APP_API_CLOUDINARY}`, {
                 method: "post",
                 body: data,
             })
@@ -144,10 +144,10 @@ function SellProductForm() {
 
         if (pics.type === "image/jpeg" || pics.type === "image/png") {
             const data = new FormData();
-            data.append("upload_preset", "wkvvcgfu");
+            data.append("upload_preset", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_PRESET}`);
             data.append("file", pics);
-            data.append("cloud_name", "dcqiakni6");
-            fetch("https://api.cloudinary.com/v1_1/dcqiakni6/image/upload", {
+            data.append("cloud_name", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_CLOUD}`);
+            fetch(`${process.env.REACT_APP_API_CLOUDINARY}`, {
                 method: "post",
                 body: data,
             })
@@ -189,10 +189,10 @@ function SellProductForm() {
 
         if (pics.type === "image/jpeg" || pics.type === "image/png") {
             const data = new FormData();
-            data.append("upload_preset", "wkvvcgfu");
+            data.append("upload_preset", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_PRESET}`);
             data.append("file", pics);
-            data.append("cloud_name", "dcqiakni6");
-            fetch("https://api.cloudinary.com/v1_1/dcqiakni6/image/upload", {
+            data.append("cloud_name", `${process.env.REACT_APP_API_CLOUDINARY_UPLOAD_CLOUD}`);
+            fetch(`${process.env.REACT_APP_API_CLOUDINARY}`, {
                 method: "post",
                 body: data,
             })
