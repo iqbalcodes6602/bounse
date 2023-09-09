@@ -230,8 +230,7 @@ function LandingPage() {
             <Text
               fontSize={{ base: "20px", md: "24px" }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua.
+              Journey Through History Wonders – Where Buyers and Sellers Unite to Celebrate the Beauty of the Past and the Promise of the Future in Our Vast Antique Marketplace!
             </Text>
           </div>
           <FormControl display="flex" alignItems="center" marginTop={{ base: "2", lg: "6" }}>
